@@ -29,7 +29,7 @@ var listCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 
-		curs, err := tasks.Find(context.Background(), bson.D{{"done", viper.GetBool("done")}})
+		curs, err := tasks.Find(context.Background(), bson.D{{Key: "done", Value: viper.GetBool("done")}})
 		if err != nil {
 			log.Fatalln(err)
 		}
