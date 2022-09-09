@@ -12,6 +12,7 @@ import (
 	"github.com/otisnado/task/db"
 	"github.com/otisnado/task/models"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -28,7 +29,7 @@ var listCmd = &cobra.Command{
 			log.Fatalln(err)
 		}
 
-		curs, err := tasks.Find(context.Background(), bson.D{})
+		curs, err := tasks.Find(context.Background(), bson.D{{"done", viper.GetBool("done")}})
 		if err != nil {
 			log.Fatalln(err)
 		}
@@ -51,4 +52,7 @@ var listCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(listCmd)
+
+	listCmd.Flags().BoolP("done", "d", false, "Only show done tasks")
+	viper.BindPFlag("done", listCmd.Flags().Lookup("done"))
 }
