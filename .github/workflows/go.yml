@@ -27,4 +27,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: task
-        path: bin/task-amd64.exe
+        path: $GITHUB_ACTION_PATH/bin/task-amd64.exe
