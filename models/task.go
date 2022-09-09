@@ -1,0 +1,32 @@
+package models
+
+import (
+	"context"
+	"time"
+
+	"github.com/otisnado/task/db"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
+)
+
+type Task struct {
+	ID      primitive.ObjectID `bson:"_id,omitempty"`
+	Author  string             `bson:"author"`
+	Content string             `bson:"content"`
+	Done    bool               `bson:"done"`
+	Date    time.Time          `bson:"date"`
+}
+
+func CreateTask(t Task) (resultOne *mongo.InsertOneResult, err error) {
+	tasks, err := db.GetCollection("tasks")
+	if err != nil {
+		return nil, err
+	}
+	result, err := tasks.InsertOne(context.Background(), t)
+	if err != nil {
+		return nil, err
+	}
+
+	defer tasks.Database().Client().Disconnect(context.Background())
+	return result, nil
+}
