@@ -19,7 +19,7 @@ jobs:
         go-version: 1.18
 
     - name: Build
-      run: GOOS=windows GOARCH=amd64 go build -o $GITHUB_ACTION_PATH/bin/task-amd64.exe ./...
+      run: go build -o $GITHUB_ACTION_PATH/bin/task-amd64.exe .
 
     - name: Test
       run: go test -v ./...
