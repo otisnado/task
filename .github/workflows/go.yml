@@ -22,7 +22,7 @@ jobs:
       run: go build -v ./...
 
     - name: Set up test credentials
-      run: mkdir ~/conftask && touch ~/conftask/app.env && echo $DB_CONFIG >> ~/conftask/app.env && cat ~/conftask/app.env
+      run: echo $DB_CONFIG && mkdir ~/conftask && touch ~/conftask/app.env && echo $DB_CONFIG >> ~/conftask/app.env && cat ~/conftask/app.env
 
     - name: Test
       run: go test -v ./...
