@@ -21,5 +21,8 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+    - name: Set up test credentials
+      run: touch ~/conftask/app.env && echo $DB_CONFIG > ~/conftask/app.env
+
     - name: Test
       run: go test -v ./...
