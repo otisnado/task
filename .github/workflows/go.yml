@@ -21,12 +21,8 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - uses: 1arp/create-a-file-action@0.2
-        with:
-          path: '~/conftask'
-          file: 'app.env'
-          content: |
-            $DB_CONFIG
+    - name: Set up test credentials
+      run: sudo touch ~/conftask/app.env && sudo echo DB_NAME=$DB_NAME > ~/conftask/app.env && sudo echo DB_HOST=$DB_HOST >> ~/conftask/app.env && sudo echo DB_USER=$DB_USER >> ~/conftask/app.env && sudo echo DB_PASSWORD=$DB_PASSWORD >> ~/conftask/app.env
 
     - name: Test
       run: go test -v ./...
