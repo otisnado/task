@@ -22,7 +22,7 @@ jobs:
       run: go build -v ./...
 
     - name: Set up test credentials
-      run: sudo mkdir ~/conftask && sudo touch ~/conftask/app.env && sudo echo DB_NAME=$DB_NAME > ~/conftask/app.env && sudo echo DB_HOST=$DB_HOST >> ~/conftask/app.env && sudo echo DB_USER=$DB_USER >> ~/conftask/app.env && sudo echo DB_PASSWORD=$DB_PASSWORD >> ~/conftask/app.env
+      run: mkdir ~/conftask && touch ~/conftask/app.env && echo $DB_CONFIG >> ~/conftask/app.env
 
     - name: Test
       run: go test -v ./...
