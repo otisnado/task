@@ -21,8 +21,10 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - name: Set up test credentials
-      run: touch ~/conftask/app.env && echo $DB_CONFIG > ~/conftask/app.env
+    - uses: "finnp/create-file-action@master"
+      env:
+        FILE_NAME: "~/conftask/app.env"
+        FILE_DATA: "$DB_CONFIG"
 
     - name: Test
       run: go test -v ./...
