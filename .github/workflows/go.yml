@@ -21,10 +21,12 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - uses: "finnp/create-file-action@master"
-      env:
-        FILE_NAME: "~/conftask/app.env"
-        FILE_DATA: "$DB_CONFIG"
+    - uses: 1arp/create-a-file-action@0.2
+        with:
+          path: '~/conftask'
+          file: 'app.env'
+          content: |
+            $DB_CONFIG
 
     - name: Test
       run: go test -v ./...
