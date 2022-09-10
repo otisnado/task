@@ -13,6 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Set up test credentials
+      run: echo $DB_CONFIG && mkdir ~/conftask && touch ~/conftask/app.env && echo $DB_CONFIG >> ~/conftask/app.env && cat ~/conftask/app.env
+
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
@@ -20,9 +23,6 @@ jobs:
 
     - name: Build
       run: go build -v ./...
-
-    - name: Set up test credentials
-      run: echo $DB_CONFIG && mkdir ~/conftask && touch ~/conftask/app.env && echo $DB_CONFIG >> ~/conftask/app.env && cat ~/conftask/app.env
 
     - name: Test
       run: go test -v ./...
